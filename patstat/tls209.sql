@@ -25,7 +25,7 @@ BULK INSERT [dbo].[tls209_appln_ipc]
 		FROM 'C:\PLR\Patstat\tls\processed\tls209.txt'
 		WITH
 		(
-		BATCHSIZE = 20000, 
+		BATCHSIZE = 100000, 
 		DATAFILETYPE = 'char',
 		FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls209.fmt'
 		)
