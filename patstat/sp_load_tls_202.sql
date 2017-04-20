@@ -1,3 +1,6 @@
+USE [patscape]
+GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,8 +12,8 @@ GO
 -- =============================================
 CREATE PROCEDURE SP_LOAD_TLS_202 
 	@lang varchar(2),
-	@datafile varchar(255) = 'G:\Patstat\Patstat Biblio\data_PATSTAT_Biblio_2016_Autumn\tls202\processed\', 
-	@formatfile varchar(255) = 'C:\PLR\R_catalys\patstat\tls202.fmt' 
+	@datafile varchar(255) = 'C:\PLR\patstat\tls\processed\', 
+	@formatfile varchar(255) = 'C:\PLR\ps_load\patstat\fmt\tls202.fmt' 
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from

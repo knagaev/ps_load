@@ -1,4 +1,5 @@
-use patstat2016b
+use patscape
+go
 
 declare @langs table(id int identity(1,1), lang varchar(10))
 
@@ -47,6 +48,8 @@ begin
 	 select @lang = lang from @langs where id = @i
 
 	 --select @lang
+	 --exec('drop table tls202_appln_title_' + @lang)
+
      exec SP_CREATE_TABLE_TLS_202 @lang
 
 end

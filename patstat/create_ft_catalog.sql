@@ -1,19 +1,19 @@
 /*** создание FT каталога с оптимизацией (на другом диске) ***/
 USE master
 GO
-ALTER DATABASE patstat2016b ADD FILEGROUP FT_FILEGROUP
+ALTER DATABASE patscape ADD FILEGROUP FT_FILEGROUP
 GO
 
--- здесь указать каталог на другом диске по отношению к диску, на котором лежит основная база patstat2016b
-ALTER DATABASE patstat2016b 
-	ADD FILE (NAME = N'patstat2016b_ft', 
-				FILENAME = N'E:\MSSQL\FT\patstat2016b_ft.mdf', 
-				SIZE = 5120KB, 
-				FILEGROWTH = 1024KB) 
+-- здесь указать каталог на другом диске по отношению к диску, на котором лежит основная база patscape
+ALTER DATABASE patscape 
+	ADD FILE (NAME = N'patscape_ft', 
+				FILENAME = N'C:\MSSQL\FT\patscape_ft.mdf', 
+				SIZE = 10240KB, 
+				FILEGROWTH = 5120KB) 
 	TO FILEGROUP FT_FILEGROUP
 GO
 
-USE patstat2016b
+USE patscape
 GO
 
 CREATE FULLTEXT CATALOG tls_ft 
@@ -39,6 +39,7 @@ ALTER FULLTEXT INDEX ON tls203_appln_abstr_en
 GO
 ***/
 
+/*
 -- проверка статуса процесса создания FT индекса
 DECLARE @CatalogName VARCHAR(MAX)
 SET     @CatalogName = 'tls_ft'
@@ -60,9 +61,12 @@ SELECT
 
 select * from sys.dm_fts_index_population;
 GO
+*/
 
+/*
 --статистика термов в FT индексе
 SELECT display_term, count(*)
-FROM sys.dm_fts_index_keywords_by_document(db_id('patstat2016b'), object_id('tls203_appln_abstr_en'))
+FROM sys.dm_fts_index_keywords_by_document(db_id('patscape'), object_id('tls203_appln_abstr_en'))
 group by display_term
 order by count(*) desc; 
+*/

@@ -1,3 +1,6 @@
+USE [patscape]
+GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,7 +12,7 @@ GO
 -- =============================================
 CREATE PROCEDURE SP_CREATE_FT_TLS_202 
 	@lang varchar(2),
-	@db varchar(50) = 'patstat2016b' 
+	@db varchar(50) = 'patscape' 
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
