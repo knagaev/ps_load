@@ -1,15 +1,16 @@
-use patstat2016b
+use patscape
+go
 
 declare @langs table(id int identity(1,1), lang varchar(10))
 
 insert into @langs (lang)
-	/*select 'ar' union
+	select 'ar' union
 	select 'bg' union
 	select 'cs' union
 	select 'da' union
 	select 'de' union
-	select 'el' union*/
-	select 'en' /*union
+	select 'el' union
+	select 'en' union
 	select 'es' union
 	select 'et' union
 	select 'fr' union
@@ -32,7 +33,7 @@ insert into @langs (lang)
 	select 'sv' union
 	select 'tr' union
 	select 'uk' union
-	select 'zh'*/
+	select 'zh'
 	 
 declare @i int
 declare @cnt int
@@ -47,8 +48,8 @@ begin
 	 select @lang = lang from @langs where id = @i
 
 	 --select @lang
-     --exec SP_CREATE_FT_TLS_202 @lang
-     exec SP_POPULATE_FT_TLS_202 @lang
+     exec SP_CREATE_FT_TLS_202 @lang
+     --exec SP_POPULATE_FT_TLS_202 @lang
 
 end
 		

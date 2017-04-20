@@ -1,4 +1,5 @@
-use patstat2016b
+use patscape
+go
 
 declare @langs table(id int identity(1,1), lang varchar(10))
 

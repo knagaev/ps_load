@@ -1,5 +1,6 @@
-USE [patstat2016b]
+USE patscape
 GO
+
 /****** Object:  Table [dbo].[tls206_person]    Script Date: 02/03/2016 08:18:13 ******/
 SET ANSI_NULLS ON
 GO
