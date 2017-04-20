@@ -1,0 +1,9 @@
+11.0
+7
+1 SQLNCHAR 0 0 ",\0\"\0" 1 appln_id ""
+2 SQLNCHAR 0 0 "\"\0,\0\"\0" 2 ipc_class_symbol SQL_Latin1_General_CP1_CI_AS
+3 SQLNCHAR 0 0 "\"\0,\0\"\0" 3 ipc_class_level SQL_Latin1_General_CP1_CI_AS
+4 SQLNCHAR 0 0 "\"\0,\0" 4 ipc_version ""
+5 SQLNCHAR 0 0 ",\0\"\0" 5 ipc_value SQL_Latin1_General_CP1_CI_AS
+6 SQLNCHAR 0 0 "\"\0,\0\"\0" 6 ipc_position SQL_Latin1_General_CP1_CI_AS
+7 SQLNCHAR 0 0 "\"\0\r\0\n\0" 7 ipc_gener_auth SQL_Latin1_General_CP1_CI_AS

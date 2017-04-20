@@ -1,0 +1,4 @@
+11.0
+2
+1 SQLNCHAR 0 0 ",\0\"\0" 1 appln_id ""
+2 SQLNCHAR 0 0 "\"\0\r\0\n\0" 2 nat_class_symbol SQL_Latin1_General_CP1_CI_AS

@@ -1,0 +1,6 @@
+11.0
+4
+1 SQLCHAR 0 0 "," 1 person_id ""
+2 SQLCHAR 0 0 "," 2 appln_id ""
+3 SQLCHAR 0 0 "," 3 applt_seq_nr ""
+4 SQLCHAR 0 0 "\n" 4 invt_seq_nr ""

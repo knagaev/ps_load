@@ -94,5 +94,8 @@ distrib_by_lng('tls203')
 simple_copy('tls201')
 simple_copy('tls204')
 simple_copy('tls205')
+simple_copy('tls207')
 
 convert_from_utf8_to_utf16('tls206')
+convert_from_utf8_to_utf16('tls209')
+convert_from_utf8_to_utf16('tls210')
