@@ -47,14 +47,35 @@ GO
 -- truncate table [tls201_appln]
 
 BULK INSERT [dbo].[tls201_appln]
-FROM 'C:\work\others\Patstat\new\patstat\tls201_part01\tls201_part01_utf16.txt'	
+FROM 'C:\PLR\Patstat\tls\processed\tls201.txt'	
 WITH
 (
---BATCHSIZE = 20000, 
+BATCHSIZE = 20000, 
 DATAFILETYPE = 'char',
 --ERRORFILE = 'C:\work\others\Patstat\new\patstat\tls201_part01\tls201_part01.bad',
-FORMATFILE = 'C:\work\others\Patstat\new\patstat\fmt\tls201.fmt'
+FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls201.fmt'
 --TABLOCK
 )
 
-select COUNT(*) from [tls201_appln]
+--select COUNT(*) from [tls201_appln]
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[tls201_appln]') AND name = N'IX_tls201_appln_date')
+DROP INDEX [IX_tls201_appln_date] ON [dbo].[tls201_appln] WITH ( ONLINE = OFF )
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tls201_appln_date] ON [dbo].[tls201_appln] 
+(
+	[appln_filing_date] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[tls201_appln]') AND name = N'IX_tls201_appln_internat')
+DROP INDEX [IX_tls201_appln_internat] ON [dbo].[tls201_appln] WITH ( ONLINE = OFF )
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tls201_appln_internat] ON [dbo].[tls201_appln] 
+(
+	[internat_appln_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+

@@ -1,6 +1,25 @@
 
 ##########
 
+def simple_copy(table_name):
+  import os, os.path, codecs
+
+  main_path = 'C:/PLR/Patstat/tls'
+  processed_path = 'C:/PLR/Patstat/tls/processed/'
+
+  if not os.path.exists(processed_path):
+    os.makedirs(processed_path)
+
+  with open(os.path.join(processed_path, table_name + '.txt'), 'w', encoding="utf-8") as dst:
+    for fname in (f for f in os.listdir(main_path) if os.path.isfile(os.path.join(main_path, f)) and f.startswith(table_name) and f.endswith('txt')):
+      with open(os.path.join(main_path, fname), encoding="utf-8") as src:
+        is_first_line = True
+        for l in src:
+          if is_first_line:
+            is_first_line = False
+            continue
+          dst.write(l)
+
 def convert_from_utf8_to_utf16(table_name):
   import os, os.path, codecs
 
@@ -72,4 +91,7 @@ def distrib_by_lng(table_name):
 distrib_by_lng('tls202')
 distrib_by_lng('tls203')
 
-convert_from_utf8_to_utf16('tls205')
+simple_copy('tls201')
+simple_copy('tls204')
+simple_copy('tls205')
+

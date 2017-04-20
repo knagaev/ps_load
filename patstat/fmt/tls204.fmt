@@ -1,0 +1,5 @@
+11.0
+3
+1 SQLCHAR 0 0 "," 1 appln_id ""
+2 SQLCHAR 0 0 "," 2 prior_appln_id SQL_Latin1_General_CP1_CI_AS
+3 SQLCHAR 0 0 "\n" 3 prior_appln_seq_nr SQL_Latin1_General_CP1_CI_AS
