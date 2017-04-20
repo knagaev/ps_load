@@ -24,7 +24,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-BULK INSERT [dbo].[tls205_tech_rel]
+BULK INSERT [dbo].[tls206_person]
 		FROM 'C:\PLR\Patstat\tls\processed\tls206.txt'
 		WITH
 		(

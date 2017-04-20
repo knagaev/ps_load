@@ -57,7 +57,7 @@ SELECT
         WHEN 7 THEN 'Building Index'
         WHEN 8 THEN 'Disk Full.  Paused'
         WHEN 9 THEN 'Change Tracking' END) AS PopulateStatus;
---SELECT OBJECTPROPERTY(object_id('tls203_appln_abstr'), 'TableFulltextPopulateStatus')
+--SELECT OBJECTPROPERTY(object_id('tls203_appln_abstr_en'), 'TableFulltextPopulateStatus')
 
 select * from sys.dm_fts_index_population;
 GO
