@@ -1,0 +1,21 @@
+11.0
+9
+1 SQLNCHAR 0 0 ",\0\"\0" 1 pat_publn_id ""
+2 SQLNCHAR 0 0 "\"\0,\0\"\0" 2 citn_id SQL_Latin1_General_CP1_CI_AS
+3 SQLNCHAR 0 0 "\"\0,\0\"\0" 3 citn_origin SQL_Latin1_General_CP1_CI_AS
+4 SQLNCHAR 0 0 "\"\0,\0\"\0" 4 cited_pat_publn_id SQL_Latin1_General_CP1_CI_AS
+5 SQLNCHAR 0 0 "\"\0,\0" 5 cited_appln_id SQL_Latin1_General_CP1_CI_AS
+6 SQLNCHAR 0 0 ",\0" 6 pat_citn_seq_nr ""
+7 SQLNCHAR 0 0 ",\0\"\0" 7 cited_npl_publn_id ""
+8 SQLNCHAR 0 0 "\"\0,\0" 8 npl_citn_seq_nr SQL_Latin1_General_CP1_CI_AS
+9 SQLNCHAR 0 0 "\r\0\n\0" 9 citn_gener_auth ""
+
+	[pat_publn_id] [int] NOT NULL DEFAULT ('0'),
+	[citn_id] [smallint] NOT NULL DEFAULT ('0'),
+	[citn_origin] [char](3) NOT NULL DEFAULT (''),
+	[cited_pat_publn_id] [int] NOT NULL DEFAULT ('0'),
+	[cited_appln_id] [int] NOT NULL DEFAULT ('0'),
+	[pat_citn_seq_nr] [smallint] NOT NULL DEFAULT ('0'),
+	[cited_npl_publn_id] [int] NOT NULL DEFAULT ('0'),
+	[npl_citn_seq_nr] [smallint] NOT NULL DEFAULT ('0'),
+	[citn_gener_auth] [char](2) NOT NULL DEFAULT (''),	

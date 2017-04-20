@@ -1,0 +1,12 @@
+11.0
+10
+1 SQLNCHAR 0 0 ",\0\"\0" 1 appln_id ""
+2 SQLNCHAR 0 0 "\"\0,\0\"\0" 2 publn_auth SQL_Latin1_General_CP1_CI_AS
+3 SQLNCHAR 0 0 "\"\0,\0\"\0" 3 publn_nr SQL_Latin1_General_CP1_CI_AS
+4 SQLNCHAR 0 0 "\"\0,\0\"\0" 4 publn_nr_original SQL_Latin1_General_CP1_CI_AS
+5 SQLNCHAR 0 0 "\"\0,\0" 5 publn_kind SQL_Latin1_General_CP1_CI_AS
+6 SQLNCHAR 0 0 ",\0" 6 appln_id ""
+7 SQLNCHAR 0 0 ",\0\"\0" 7 publn_date ""
+8 SQLNCHAR 0 0 "\"\0,\0" 8 publn_lg SQL_Latin1_General_CP1_CI_AS
+9 SQLNCHAR 0 0 ",\0" 9 publn_first_grant ""
+10 SQLNCHAR 0 0 "\r\0\n\0" 10 publn_claims ""
