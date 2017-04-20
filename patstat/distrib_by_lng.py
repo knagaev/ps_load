@@ -95,3 +95,4 @@ simple_copy('tls201')
 simple_copy('tls204')
 simple_copy('tls205')
 
+convert_from_utf8_to_utf16('tls206')
