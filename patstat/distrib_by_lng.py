@@ -1,48 +1,75 @@
 
 ##########
-import os, os.path, codecs
-table_name = 'tls202'
 
-main_path = 'C:/work/others/Patstat/new/patstat/' + table_name + '_part01'
-processed_path = 'C:/work/others/Patstat/new/patstat/' + table_name + '_part01/processed/'
+def convert_from_utf8_to_utf16(table_name):
+  import os, os.path, codecs
 
-if not os.path.exists(processed_path):
-  os.makedirs(processed_path)
+  main_path = 'C:/PLR/Patstat/tls'
+  processed_path = 'C:/PLR/Patstat/tls/processed/'
 
-d = dict()
-dest = dict()
+  if not os.path.exists(processed_path):
+    os.makedirs(processed_path)
 
-cntr = 0
-max_cntr = 10000
+  with open(os.path.join(processed_path, table_name + '.txt'), 'w', encoding="utf-16") as dst:
+    for fname in (f for f in os.listdir(main_path) if os.path.isfile(os.path.join(main_path, f)) and f.startswith(table_name) and f.endswith('txt')):
+      with open(os.path.join(main_path, fname), encoding="utf-8") as src:
+        is_first_line = True
+        for l in src:
+          if is_first_line:
+            is_first_line = False
+            continue
+          dst.write(l)
 
-for fname in (f for f in os.listdir(main_path) if os.path.isfile(os.path.join(main_path, f)) and f.endswith('txt')):
-  with open(os.path.join(main_path, fname), encoding="utf-8") as src:
-    for l in src:
-      st = l.find(',"')
-      if st == -1:
-        continue
-      #out_file_name = os.path.splitext(fname)[0] + '_' + l[st+2: st+4] + '.txt'
-      out_file_name = table_name + '_' + l[st+2: st+4] + '.txt'
-      if not out_file_name in d:
-        d[out_file_name] = list()
-        dest[out_file_name] = open(os.path.join(processed_path, out_file_name), 'w', encoding="utf-16")
-        #dest[out_file_name].write(codecs.BOM_UTF16_LE)
-      d[out_file_name].append(l)
 
-      cntr = cntr + 1
-      if cntr > max_cntr:
-        cntr = 0
+def distrib_by_lng(table_name):
+  import os, os.path, codecs
 
-        for out_file_name in d:
-          for l in d[out_file_name]:
-            dest[out_file_name].write(l)
+  main_path = 'C:/PLR/Patstat/tls'
+  processed_path = 'C:/PLR/Patstat/tls/processed/'
+
+  if not os.path.exists(processed_path):
+    os.makedirs(processed_path)
+
+  d = dict()
+  dest = dict()
+
+  cntr = 0
+  max_cntr = 10000
+
+  for fname in (f for f in os.listdir(main_path) if os.path.isfile(os.path.join(main_path, f)) and f.startswith(table_name) and f.endswith('txt')):
+    with open(os.path.join(main_path, fname), encoding="utf-8") as src:
+      for l in src:
+        st = l.find(',"')
+        if st == -1:
+          continue
+        #out_file_name = os.path.splitext(fname)[0] + '_' + l[st+2: st+4] + '.txt'
+        out_file_name = table_name + '_' + l[st+2: st+4] + '.txt'
+        if not out_file_name in d:
           d[out_file_name] = list()
-          #w.close()
+          dest[out_file_name] = open(os.path.join(processed_path, out_file_name), 'w', encoding="utf-16")
+          #dest[out_file_name].write(codecs.BOM_UTF16_LE)
+        d[out_file_name].append(l)
 
-    for out_file_name in d:
-      for l in d[out_file_name]:
-        dest[out_file_name].write(l)
-      d[out_file_name] = list()
+        cntr = cntr + 1
+        if cntr > max_cntr:
+          cntr = 0
 
-for out_file_name in dest:
-  dest[out_file_name].close()
+          for out_file_name in d:
+            for l in d[out_file_name]:
+              dest[out_file_name].write(l)
+            d[out_file_name] = list()
+            #w.close()
+
+      for out_file_name in d:
+        for l in d[out_file_name]:
+          dest[out_file_name].write(l)
+        d[out_file_name] = list()
+
+  for out_file_name in dest:
+    dest[out_file_name].close()
+
+
+distrib_by_lng('tls202')
+distrib_by_lng('tls203')
+
+convert_from_utf8_to_utf16('tls205')
