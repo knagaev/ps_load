@@ -23,6 +23,7 @@ BULK INSERT [dbo].[tls214_npl_publn]
 		(
 		BATCHSIZE = 20000, 
 		DATAFILETYPE = 'char',
+		ERRORFILE = 'C:\PLR\Patstat\tls\bad_tls214.txt',
 		FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls214.fmt'
 		)
 GO
