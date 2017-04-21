@@ -98,6 +98,7 @@ simple_copy('tls207')
 simple_copy('tls215')
 simple_copy('tls216')
 simple_copy('tls222')
+simple_copy('tls223')
 
 convert_from_utf8_to_utf16('tls206')
 convert_from_utf8_to_utf16('tls209')
