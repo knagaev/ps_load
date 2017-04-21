@@ -1,0 +1,5 @@
+11.0
+3
+1 SQLNCHAR 0 0 ",\0" 1 npl_publn_id ""
+2 SQLNCHAR 0 0 "\"\0,\0\"\0" 2 npl_type SQL_Latin1_General_CP1_CI_AS
+3 SQLNCHAR 0 0 "\"\0\r\0\n\0" 3 npl_biblio SQL_Latin1_General_CP1_CI_AS

@@ -15,3 +15,14 @@ PRIMARY KEY CLUSTERED
 	[npl_publn_id] ASC
 )WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+
+
+BULK INSERT [dbo].[tls214_npl_publn]
+		FROM 'C:\PLR\Patstat\tls\processed\tls214.txt'
+		WITH
+		(
+		BATCHSIZE = 20000, 
+		DATAFILETYPE = 'char',
+		FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls214.fmt'
+		)
+GO
