@@ -1,0 +1,5 @@
+11.0
+3
+1 SQLNCHAR 0 0 ",\0" 1 pat_publn_id ""
+2 SQLNCHAR 0 0 ",\0\"\0" 2 citn_id ""
+3 SQLNCHAR 0 0 "\"\0\r\0\n\0" 3 citn_categ SQL_Latin1_General_CP1_CI_AS
