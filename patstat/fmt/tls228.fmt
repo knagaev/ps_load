@@ -1,0 +1,4 @@
+11.0
+2
+1 SQLCHAR 0 0 "," 1 docdb_family_id ""
+2 SQLCHAR 0 0 "\r\n" 2 cited_docdb_family_id ""

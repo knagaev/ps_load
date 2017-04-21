@@ -1,0 +1,5 @@
+11.0
+3
+1 SQLCHAR 0 0 "," 1 appln_id ""
+2 SQLCHAR 0 0 "," 2 techn_field_nr ""
+3 SQLCHAR 0 0 "\r\n" 3 weight ""
