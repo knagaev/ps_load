@@ -22,3 +22,14 @@ PRIMARY KEY CLUSTERED
 	[citn_id] ASC
 )WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+
+
+BULK INSERT [dbo].[tls212_citation]
+		FROM 'C:\PLR\Patstat\tls\processed\tls212.txt'
+		WITH
+		(
+		BATCHSIZE = 20000, 
+		DATAFILETYPE = 'char',
+		FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls212.fmt'
+		)
+GO
