@@ -1,0 +1,23 @@
+11.0
+21
+1 SQLNCHAR 0 0 ",\0" 1 person_orig_id ""
+2 SQLNCHAR 0 0 ",\0\"\0" 2 person_id ""
+3 SQLNCHAR 0 0 "\"\0,\0\"\0" 3 source SQL_Latin1_General_CP1_CI_AS
+4 SQLNCHAR 0 0 "\"\0,\0\"\0" 4 source_version SQL_Latin1_General_CP1_CI_AS
+5 SQLNCHAR 0 0 "\"\0,\0\"\0" 5 name_freeform SQL_Latin1_General_CP1_CI_AS
+6 SQLNCHAR 0 0 "\"\0,\0\"\0" 6 last_name SQL_Latin1_General_CP1_CI_AS
+7 SQLNCHAR 0 0 "\"\0,\0\"\0" 7 first_name SQL_Latin1_General_CP1_CI_AS
+8 SQLNCHAR 0 0 "\"\0,\0\"\0" 8 middle_name SQL_Latin1_General_CP1_CI_AS
+9 SQLNCHAR 0 0 "\"\0,\0\"\0" 9 address_freeform SQL_Latin1_General_CP1_CI_AS
+10 SQLNCHAR 0 0 "\"\0,\0\"\0" 10 address_1 SQL_Latin1_General_CP1_CI_AS
+11 SQLNCHAR 0 0 "\"\0,\0\"\0" 11 address_2 SQL_Latin1_General_CP1_CI_AS
+12 SQLNCHAR 0 0 "\"\0,\0\"\0" 12 address_3 SQL_Latin1_General_CP1_CI_AS
+13 SQLNCHAR 0 0 "\"\0,\0\"\0" 13 address_4 SQL_Latin1_General_CP1_CI_AS
+14 SQLNCHAR 0 0 "\"\0,\0\"\0" 14 address_5 SQL_Latin1_General_CP1_CI_AS
+15 SQLNCHAR 0 0 "\"\0,\0\"\0" 15 street SQL_Latin1_General_CP1_CI_AS
+16 SQLNCHAR 0 0 "\"\0,\0\"\0" 16 city SQL_Latin1_General_CP1_CI_AS
+17 SQLNCHAR 0 0 "\"\0,\0\"\0" 17 zip_code SQL_Latin1_General_CP1_CI_AS
+18 SQLNCHAR 0 0 "\"\0,\0\"\0" 18 state SQL_Latin1_General_CP1_CI_AS
+19 SQLNCHAR 0 0 "\"\0,\0\"\0" 19 person_ctry_code SQL_Latin1_General_CP1_CI_AS
+20 SQLNCHAR 0 0 "\"\0,\0\"\0" 20 residence_ctry_code SQL_Latin1_General_CP1_CI_AS
+21 SQLNCHAR 0 0 "\"\0\r\0\n\0" 21 role SQL_Latin1_General_CP1_CI_AS
