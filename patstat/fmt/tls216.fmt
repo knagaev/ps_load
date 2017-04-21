@@ -1,0 +1,5 @@
+11.0
+3
+1 SQLCHAR 0 0 "," 1 appln_id ""
+2 SQLCHAR 0 0 ",\"" 2 parent_appln_id ""
+3 SQLCHAR 0 0 "\"\r\n" 3 contn_type SQL_Latin1_General_CP1_CI_AS
