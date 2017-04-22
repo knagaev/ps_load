@@ -1,17 +1,17 @@
 11.0
 15
-1 SQLNCHAR 0 0 ",\0\"\0" 1 person_id ""
+1 SQLCHAR 0 0 ",\0\"\0" 1 person_id ""
 2 SQLNCHAR 0 0 "\"\0,\0\"\0" 2 person_name SQL_Latin1_General_CP1_CI_AS
 3 SQLNCHAR 0 0 "\"\0,\0\"\0" 3 person_address SQL_Latin1_General_CP1_CI_AS
-4 SQLNCHAR 0 0 "\"\0,\0\"\0" 4 person_ctry_code SQL_Latin1_General_CP1_CI_AS
-5 SQLNCHAR 0 0 "\"\0,\0" 5 nuts SQL_Latin1_General_CP1_CI_AS
-6 SQLNCHAR 0 0 ",\0\"\0" 6 nuts_level ""
-7 SQLNCHAR 0 0 ",\0\"\0" 7 doc_std_name_id ""
+4 SQLCHAR 0 0 "\"\0,\0\"\0" 4 person_ctry_code SQL_Latin1_General_CP1_CI_AS
+5 SQLCHAR 0 0 "\"\0,\0" 5 nuts SQL_Latin1_General_CP1_CI_AS
+6 SQLCHAR 0 0 ",\0\"\0" 6 nuts_level ""
+7 SQLCHAR 0 0 ",\0\"\0" 7 doc_std_name_id ""
 8 SQLNCHAR 0 0 "\"\0,\0" 8 doc_std_name SQL_Latin1_General_CP1_CI_AS
-9 SQLNCHAR 0 0 ",\0\"\0" 9 psn_id ""
+9 SQLCHAR 0 0 ",\0\"\0" 9 psn_id ""
 10 SQLNCHAR 0 0 "\"\0,\0" 10 psn_name SQL_Latin1_General_CP1_CI_AS
-11 SQLNCHAR 0 0 ",\0\"\0" 11 psn_level ""
-12 SQLNCHAR 0 0 "\"\0,\0" 12 psn_sector SQL_Latin1_General_CP1_CI_AS
-13 SQLNCHAR 0 0 ",\0\"\0" 13 han_id ""
+11 SQLCHAR 0 0 ",\0\"\0" 11 psn_level ""
+12 SQLCHAR 0 0 "\"\0,\0" 12 psn_sector SQL_Latin1_General_CP1_CI_AS
+13 SQLCHAR 0 0 ",\0\"\0" 13 han_id ""
 14 SQLNCHAR 0 0 "\"\0,\0" 14 han_name SQL_Latin1_General_CP1_CI_AS
-15 SQLNCHAR 0 0 "\r\0\n\0" 15 han_harmonized ""
+15 SQLCHAR 0 0 "\r\0\n\0" 15 han_harmonized ""
