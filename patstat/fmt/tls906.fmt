@@ -9,7 +9,7 @@
 7 SQLNCHAR 0 0 ",\0\"\0" 7 doc_std_name_id ""
 8 SQLNCHAR 0 0 "\"\0,\0" 8 doc_std_name SQL_Latin1_General_CP1_CI_AS
 9 SQLNCHAR 0 0 ",\0\"\0" 9 psn_id ""
-10 SQNLCHAR 0 0 "\"\0,\0" 10 psn_name SQL_Latin1_General_CP1_CI_AS
+10 SQLNCHAR 0 0 "\"\0,\0" 10 psn_name SQL_Latin1_General_CP1_CI_AS
 11 SQLNCHAR 0 0 ",\0\"\0" 11 psn_level ""
 12 SQLNCHAR 0 0 "\"\0,\0" 12 psn_sector SQL_Latin1_General_CP1_CI_AS
 13 SQLNCHAR 0 0 ",\0\"\0" 13 han_id ""
