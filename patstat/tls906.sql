@@ -33,7 +33,7 @@ BULK INSERT [dbo].[tls906_person]
 		WITH
 		(
 		BATCHSIZE = 20000, 
-		DATAFILETYPE = 'char',
+		DATAFILETYPE = 'widenative',
 		ERRORFILE = 'C:\PLR\Patstat\tls\bad_tls906.txt',
 		FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls906.fmt'
 		)
