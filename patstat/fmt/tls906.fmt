@@ -1,6 +1,6 @@
 11.0
 15
-1 SQLCHAR 0 0 ",\0\"\0" 1 person_id ""
+1 SQLNCHAR 0 0 ",\0\"\0" 1 person_id ""
 2 SQLNCHAR 0 0 "\"\0,\0\"\0" 2 person_name SQL_Latin1_General_CP1_CI_AS
 3 SQLNCHAR 0 0 "\"\0,\0\"\0" 3 person_address SQL_Latin1_General_CP1_CI_AS
 4 SQLCHAR 0 0 "\"\0,\0\"\0" 4 person_ctry_code SQL_Latin1_General_CP1_CI_AS
