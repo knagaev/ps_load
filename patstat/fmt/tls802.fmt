@@ -1,0 +1,12 @@
+11.0
+10
+1 SQLCHAR 0 0 ",\"" 1 lec_id ""
+2 SQLCHAR 0 0 "\",\"" 2 auth_cc SQL_Latin1_General_CP1_CI_AS
+3 SQLCHAR 0 0 "\",\"" 3 lec_name SQL_Latin1_General_CP1_CI_AS
+4 SQLCHAR 0 0 "\",\"" 4 nat_auth_cc SQL_Latin1_General_CP1_CI_AS
+5 SQLCHAR 0 0 "\",\"" 5 nat_lec_name SQL_Latin1_General_CP1_CI_AS
+6 SQLCHAR 0 0 "\",\"" 6 impact SQL_Latin1_General_CP1_CI_AS
+7 SQLCHAR 0 0 "\"," 7 lec_descr SQL_Latin1_General_CP1_CI_AS
+8 SQLCHAR 0 0 ",\"" 8 lecg_id ""
+9 SQLCHAR 0 0 "\",\"" 9 lecg_name SQL_Latin1_General_CP1_CI_AS
+10 SQLCHAR 0 0 "\"\r\n" 10 lecg_descr SQL_Latin1_General_CP1_CI_AS
