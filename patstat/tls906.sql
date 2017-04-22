@@ -28,6 +28,8 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
+--truncate table [tls906_person]
+
 BULK INSERT [dbo].[tls906_person]
 		FROM 'C:\PLR\Patstat\tls\processed\tls906.txt'
 		WITH
