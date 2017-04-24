@@ -68,6 +68,8 @@ GO
 --from tls211_pat_publn
 --GO
 
+-- truncate table appln_search;
+
 select appln_id, appln_filing_year appln_year, appln_auth 
  into appln_search 
 from tls201_appln

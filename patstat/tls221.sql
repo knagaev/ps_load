@@ -48,8 +48,8 @@ BULK INSERT [dbo].[tls221_inpadoc_prs]
 		WITH
 		(
 		BATCHSIZE = 20000, 
-		DATAFILETYPE = 'char',
-		ERRORFILE = 'C:\PLR\Patstat\tls\bad_tls221.txt',
+		DATAFILETYPE = 'widenative',
+		--ERRORFILE = 'C:\PLR\Patstat\tls\bad_tls221.txt',
 		FORMATFILE = 'C:\PLR\ps_load\patstat\fmt\tls221.fmt'
 		)
 GO
