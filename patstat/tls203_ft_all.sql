@@ -48,8 +48,8 @@ begin
 	 select @lang = lang from @langs where id = @i
 
 	 --select @lang
-     exec SP_CREATE_FT_TLS_203 @lang
-     --exec SP_POPULATE_FT_TLS_203 @lang
+     --exec SP_CREATE_FT_TLS_203 @lang
+     exec SP_POPULATE_FT_TLS_203 @lang
 
 end
 		
