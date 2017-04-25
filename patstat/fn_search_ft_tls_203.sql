@@ -31,7 +31,10 @@ BEGIN
 	if @near_distance = 0
 		set @near_distance = (len(@cond) - len(replace(@cond, ',', ''))) * 3;
 
-	declare @near varchar(30) = 'NEAR((' + @cond + '),  ' + cast(@near_distance as varchar) + ', ' + @order + ')';
+	declare @near varchar(8000) = 'NEAR((' + @cond + '),  ' + cast(@near_distance as varchar) + ', ' + @order + ')';
+
+	INSERT @rtnTable select 1;
+	DELETE FROM @rtnTable;
 
 	INSERT @rtnTable
 	SELECT [KEY]
@@ -101,11 +104,11 @@ BEGIN
 END
 */
 
-select * from FN_SEARCH_FT_TLS_203 ('red, laser', default, 'FALSE');
+select * from FN_SEARCH_FT_TLS_203 ('yellow, laser', default, 'FALSE');
 
 select appln_year, count(*)
 from 
-FN_SEARCH_FT_TLS_203 ('red, laser', default, 'FALSE') KEYS
+FN_SEARCH_FT_TLS_203 ('blue, laser', default, 'FALSE') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
@@ -127,7 +130,7 @@ order by count(*) desc;
 -- статистика распределения документов с требуемыми термами по годам и странам
 select appln_auth, count(*)
 from 
-FN_SEARCH_FT_TLS_203 ('red, laser', default, 'FALSE') KEYS
+FN_SEARCH_FT_TLS_203 ('yellow, laser', default, 'FALSE') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
