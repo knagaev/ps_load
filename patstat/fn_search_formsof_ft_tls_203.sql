@@ -5,6 +5,40 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+/*
+DROP FUNCTION splitstring
+go
+
+CREATE FUNCTION splitstring ( @stringToSplit NVARCHAR(MAX), @delim nvarchar(1) = N',' )
+RETURNS
+ @returnList TABLE ([Item] [nvarchar] (500))
+AS
+BEGIN
+
+ DECLARE @name NVARCHAR(255)
+ DECLARE @pos INT
+
+ WHILE CHARINDEX(@delim, @stringToSplit) > 0
+ BEGIN
+  SELECT @pos  = CHARINDEX(@delim, @stringToSplit)  
+  SELECT @name = SUBSTRING(@stringToSplit, 1, @pos-1)
+
+  INSERT INTO @returnList 
+  SELECT @name
+
+  SELECT @stringToSplit = LTRIM(RTRIM(SUBSTRING(@stringToSplit, @pos+1, LEN(@stringToSplit)-@pos)))
+ END
+
+ INSERT INTO @returnList
+ SELECT @stringToSplit
+
+ RETURN
+END
+*/
+
+
+
 /*
 DROP FUNCTION [dbo].[FN_SEARCH_FORMSOF_FT_TLS_203]
 GO
@@ -103,11 +137,11 @@ END
 
 
 
-select * from FN_SEARCH_FORMSOF_FT_TLS_203 ('zentralen, optischen');
+select * from FN_SEARCH_FORMSOF_FT_TLS_203 (N'zentralen, optischen');
 
 select appln_year, count(*)
 from 
-FN_SEARCH_FORMSOF_FT_TLS_203 ('blue, laser') KEYS
+FN_SEARCH_FORMSOF_FT_TLS_203 (N'красный, лазер') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
@@ -118,7 +152,7 @@ order by count(*) desc;
 -- статистика распределения документов с требуемыми термами по годам и странам
 select appln_year, appln_auth, count(*)
 from 
-FN_SEARCH_FORMSOF_FT_TLS_203 ('red, laser') KEYS
+FN_SEARCH_FORMSOF_FT_TLS_203 (N'красный, лазер') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
@@ -129,7 +163,7 @@ order by count(*) desc;
 -- статистика распределения документов с требуемыми термами по годам и странам
 select appln_auth, count(*)
 from 
-FN_SEARCH_FORMSOF_FT_TLS_203 ('yellow, laser') KEYS
+FN_SEARCH_FORMSOF_FT_TLS_203 (N'красный, лазер') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
