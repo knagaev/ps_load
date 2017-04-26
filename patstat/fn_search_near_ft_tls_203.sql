@@ -13,9 +13,9 @@ GO
 -- Description:	Загрузка tls_203 Patstat
 -- =============================================
 CREATE FUNCTION [dbo].[FN_SEARCH_NEAR_FT_TLS_203] (
-	@cond varchar(max),
+	@cond nvarchar(max),
 	@near_distance int = 0,
-	@order varchar(10) = 'TRUE'
+	@order nvarchar(10) = 'TRUE'
 	)
 RETURNS  @rtnTable TABLE 
 (
@@ -28,7 +28,7 @@ BEGIN
 	if @near_distance = 0
 		set @near_distance = (len(@cond) - len(replace(@cond, ',', ''))) * 3;
 
-	declare @near varchar(8000) = 'NEAR((' + @cond + '),  ' + cast(@near_distance as varchar) + ', ' + @order + ')';
+	declare @near nvarchar(4000) = N'NEAR((' + @cond + N'),  ' + cast(@near_distance as nvarchar) + N', ' + @order + N')';
 
 	INSERT @rtnTable
 	SELECT [KEY]
@@ -98,11 +98,11 @@ BEGIN
 END
 */
 
-select * from FN_SEARCH_NEAR_FT_TLS_203 ('yellow, laser', default, 'FALSE');
+select * from FN_SEARCH_NEAR_FT_TLS_203 (N'процесс, охлаждения', default, 'FALSE');
 
 select appln_year, count(*)
 from 
-FN_SEARCH_NEAR_FT_TLS_203 ('blue, laser', default, 'FALSE') KEYS
+FN_SEARCH_NEAR_FT_TLS_203 (N'процесс, охлаждения', default, 'FALSE') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
@@ -113,7 +113,7 @@ order by count(*) desc;
 -- статистика распределения документов с требуемыми термами по годам и странам
 select appln_year, appln_auth, count(*)
 from 
-FN_SEARCH_NEAR_FT_TLS_203 ('red, laser', default, 'FALSE') KEYS
+FN_SEARCH_NEAR_FT_TLS_203 (N'процесс, охлаждения', default, 'FALSE') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
@@ -124,7 +124,7 @@ order by count(*) desc;
 -- статистика распределения документов с требуемыми термами по годам и странам
 select appln_auth, count(*)
 from 
-FN_SEARCH_NEAR_FT_TLS_203 ('yellow, laser', default, 'FALSE') KEYS
+FN_SEARCH_NEAR_FT_TLS_203 (N'процесс, охлаждения', default, 'FALSE') KEYS
 inner 
 -- loop -- хинт, с ним у меня самые быстрые запросы получались (альтернатива hash, merge), можно его включить 
 join appln_search ayc
