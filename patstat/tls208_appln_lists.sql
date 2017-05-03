@@ -150,15 +150,16 @@ GO
  
 /****************************************************************************/
 
-select appln_id, applicants = stuff((select '; ' + person_name as [text()]
-            from tls206_person xt
-            where xt.person_id = t.person_id order by applt_seq_nr desc
-            for xml path('') ), 1, 2, '')
-      from tls207_pers_appln t
-            inner join tls206_person p
-                  on t.person_id = p.person_id
-      where t.applt_seq_nr > 0
-      group by t.appln_id
+select appln_id, 
+        applicants = stuff((select '; ' + person_name as [text()]
+          from tls206_person xt
+          where xt.person_id = t.person_id order by applt_seq_nr desc
+          for xml path('') ), 1, 2, '')
+from tls207_pers_appln t
+  inner join tls206_person p
+    on t.person_id = p.person_id
+where t.applt_seq_nr > 0
+group by t.appln_id
  
 CREATE function [dbo].[applicants_list](@appln_id int) returns varchar(MAX)
 as begin
@@ -188,41 +189,18 @@ end
 GO
  
 /****************************************************************************/
+
+select appln_id, 
+        applicants = stuff((select '; ' + person_name as [text()]
+          from tls206_person xt
+          where xt.person_id = t.person_id order by invt_seq_nr desc
+          for xml path('') ), 1, 2, '')
+from tls207_pers_appln t
+  inner join tls206_person p
+    on t.person_id = p.person_id
+where t.invt_seq_nr > 0
+group by t.appln_id
  
- 
-CREATE function [dbo].[CPC_list](@appln_id int) returns varchar(MAX)
-as begin
-       declare @result varchar(MAX)
-       set @result=''
-       declare c cursor for select cpc_class_symbol, cpc_position from tls224_appln_cpc where appln_id=@appln_id order by cpc_position asc
-       declare @cpc_class_symbol varchar(15), @cpc_position char(1)
- 
- 
-       open c
- 
-       
-       fetch next from c into @cpc_class_symbol, @cpc_position
-       while @@FETCH_STATUS=0
-       begin
- 
-                    
-             
-             set @result=@result+replace(@cpc_class_symbol,' ','')+
-             ---iif(@ipc_position='F', '*', '')
-             +'; '
-             fetch next from c into @cpc_class_symbol, @cpc_position     
-       end
-       close c deallocate c
-       
-       if @result like '%; ' set @result=left(@result, len(@result)-1)
-       
- 
-       return @result
- 
-end
- 
- 
-/****************************************************************************/
  
 CREATE function [dbo].[inventors_list](@appln_id int) returns varchar(MAX)
 as begin
@@ -253,7 +231,11 @@ GO
  
 /****************************************************************************/
  
- 
+select max(publn_date)
+from tls211_pat_publn
+where publn_date <> '9999-12-31'
+group by appln_id
+
 create function [dbo].[last_Publn_date](@appln_id int) returns date as begin
 return (select top 1 publn_date from tls211_pat_publn where appln_id=@appln_id 
        
