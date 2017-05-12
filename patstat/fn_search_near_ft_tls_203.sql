@@ -98,7 +98,7 @@ BEGIN
 END
 */
 
-select * from FN_SEARCH_NEAR_FT_TLS_203 (N'процесс, охлаждения', default, 'FALSE');
+select * from FN_SEARCH_NEAR_FT_TLS_203 (N'метод, съединение', default, 'FALSE');
 
 select appln_year, count(*)
 from 

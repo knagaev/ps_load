@@ -136,8 +136,8 @@ END
 */
 
 
-
-select * from FN_SEARCH_FORMSOF_FT_TLS_203 (N'zentralen, optischen');
+select * from tls203_appln_abstr_bg where appln_id in(
+select appln_id from FN_SEARCH_FORMSOF_FT_TLS_203 (N'метод, съединение'));
 
 select appln_year, count(*)
 from 

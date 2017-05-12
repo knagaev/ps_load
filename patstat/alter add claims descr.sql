@@ -150,11 +150,11 @@ ALTER FULLTEXT INDEX ON tls203_appln_abstr_tr ADD (appln_claims Language 1055, a
 ALTER FULLTEXT INDEX ON tls203_appln_abstr_uk ADD (appln_claims Language 1058, appln_descr Language 1058) WITH NO POPULATION;
 ALTER FULLTEXT INDEX ON tls203_appln_abstr_zh ADD (appln_claims Language 3076, appln_descr Language 3076) WITH NO POPULATION;
 
-UPDATE patscape.[dbo].[tls203_appln_abstr_ru] dst
+UPDATE patscape.[dbo].[tls203_appln_abstr_ru]
 set 
-dst.appln_claims = (select src.appln_claims from [patstat2016a].[dbo].[tls203_appln_abstr] src where src.appln_id = dst.appln.id),
-dst.appln_descr = (select src.appln_descr from [patstat2016a].[dbo].[tls203_appln_abstr] src where src.appln_id = dst.appln.id),
-
+appln_claims = (select src.appln_claims from [patstat2016a].[dbo].[tls202_appln_text] src where src.appln_id = patscape.[dbo].[tls203_appln_abstr_ru].appln_id),
+appln_descr = (select src.appln_descr from [patstat2016a].[dbo].[tls202_appln_text] src where src.appln_id = patscape.[dbo].[tls203_appln_abstr_ru].appln_id)
+;
 
 ALTER FULLTEXT INDEX ON tls203_appln_abstr_ar START FULL POPULATION;
 ALTER FULLTEXT INDEX ON tls203_appln_abstr_bg START FULL POPULATION;

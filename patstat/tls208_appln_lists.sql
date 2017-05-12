@@ -5,8 +5,8 @@
  
 --Формируется она с помощью представлений v_tls208_appln_lists и v_tls208_appln_title:
  
-CREATE VIEW [dbo].[v_tls208_appln_lists]
-AS
+--CREATE VIEW [dbo].[v_tls208_appln_lists]
+--AS
       SELECT appln_id, 
             dbo.IPC_list(appln_id) AS IPC, 
             dbo.CPC_list(appln_id) AS CPC, 
@@ -63,12 +63,12 @@ GO
  
 /****************************************************************************/
 
-select appln_id, IPC = stuff((select '; ' + ipc_class_symbol as [text()]
-            from tls209_appln_ipc xt
-            where xt.appln_id = t.appln_id order by ipc_position desc
-            for xml path('') ), 1, 2, '')
-      from tls209_appln_ipc t
-      group by t.appln_id
+select appln_id, IPC = stuff((select '; ' + replace(ipc_class_symbol, ' ', '') as [text()]
+							from tls209_appln_ipc xt
+							where xt.appln_id = t.appln_id order by ipc_position asc
+							for xml path('') ), 1, 2, '')
+					  from tls209_appln_ipc t
+					  group by t.appln_id
 
 CREATE function [dbo].[IPC_list](@appln_id int) returns varchar(MAX)
 as begin
@@ -152,14 +152,15 @@ GO
 
 select appln_id, 
         applicants = stuff((select '; ' + person_name as [text()]
-          from tls206_person xt
-          where xt.person_id = t.person_id order by applt_seq_nr desc
+          from tls206_person p inner join tls207_pers_appln xt on xt.person_id = p.person_id
+          where t.appln_id = xt.appln_id and xt.applt_seq_nr > 0 order by applt_seq_nr asc
           for xml path('') ), 1, 2, '')
 from tls207_pers_appln t
-  inner join tls206_person p
-    on t.person_id = p.person_id
-where t.applt_seq_nr > 0
+  --inner join tls206_person p
+    --on t.person_id = p.person_id
+--where t.applt_seq_nr > 0
 group by t.appln_id
+;
  
 CREATE function [dbo].[applicants_list](@appln_id int) returns varchar(MAX)
 as begin
@@ -191,7 +192,7 @@ GO
 /****************************************************************************/
 
 select appln_id, 
-        applicants = stuff((select '; ' + person_name as [text()]
+        inventors = stuff((select '; ' + person_name as [text()]
           from tls206_person xt
           where xt.person_id = t.person_id order by invt_seq_nr desc
           for xml path('') ), 1, 2, '')
@@ -274,7 +275,17 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-
+SELECT t201.appln_id, t201.appln_auth,
+  CASE 
+    WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.pat_publn_id
+    ELSE t201.earliest_pat_publn_id
+  end AS [base_pat_publn_id]
+FROM tls201_appln t201
+  LEFT JOIN (SELECT t211.appln_id, t211.pat_publn_id 
+              FROM 
+              (SELECT appln_id, pat_publn_id, ROW_NUMBER() OVER (PARTITION BY appln_id ORDER BY publn_date DESC) rn 
+                FROM tls211_pat_publn WHERE publn_date <> '9999-12-31') t211
+              WHERE t211.rn = 1) t211rusu ON t211rusu.appln_id = t201.appln_id AND t201.appln_auth in ('RU','SU')
 
 
 create function [dbo].[base_pat_publn_id](@appln_id int) returns int as begin
@@ -329,7 +340,7 @@ FROM tls201_appln t201
                 FROM tls211_pat_publn WHERE publn_date <> '9999-12-31') t211
               WHERE t211.rn = 1) t211rusu ON t211rusu.appln_id = t201.appln_id AND t201.appln_auth in ('RU','SU')
   LEFT JOIN tls211_pat_publn t211other ON t211other.pat_publn_id = t201.earliest_pat_publn_id AND t201.appln_auth not in ('RU','SU')
-GROUP BY t201.appln_id
+--GROUP BY t201.appln_id
 
 SELECT appln_id, publn_auth 
 FROM 
@@ -368,7 +379,18 @@ end
 
 
 
-
+SELECT t201.appln_id, 
+  CASE 
+    WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.publn_date
+    ELSE t201.earliest_publn_date
+  end AS base_publn_auth
+FROM tls201_appln t201
+  LEFT JOIN (SELECT t211.appln_id, t211.publn_date 
+              FROM 
+              (SELECT appln_id, publn_date, ROW_NUMBER() OVER (PARTITION BY appln_id ORDER BY publn_date DESC) rn 
+                FROM tls211_pat_publn WHERE publn_date <> '9999-12-31') t211
+              WHERE t211.rn = 1) t211rusu ON t211rusu.appln_id = t201.appln_id AND t201.appln_auth in ('RU','SU')
+;
 
 GO
 /****** Object:  UserDefinedFunction [dbo].[base_publn_date]    Script Date: 03.05.2017 17:53:19 ******/
