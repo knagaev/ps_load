@@ -89,3 +89,40 @@ go
 
 create index ndx_tmp_base_pat_publn_ids on tmp_base_pat_publn_ids(appln_id, base_pat_publn_id);
 go
+
+update tls208_appln_lists
+  set appln_title = (select appln_title from 
+      (
+      select appln_id, appln_title from tls202_appln_title_ar union all 
+      select appln_id, appln_title from tls202_appln_title_bg union all 
+      select appln_id, appln_title from tls202_appln_title_cs union all 
+      select appln_id, appln_title from tls202_appln_title_da union all 
+      select appln_id, appln_title from tls202_appln_title_de union all 
+      select appln_id, appln_title from tls202_appln_title_el union all 
+      select appln_id, appln_title from tls202_appln_title_en union all 
+      select appln_id, appln_title from tls202_appln_title_es union all 
+      select appln_id, appln_title from tls202_appln_title_et union all 
+      select appln_id, appln_title from tls202_appln_title_fr union all 
+      select appln_id, appln_title from tls202_appln_title_hr union all 
+      select appln_id, appln_title from tls202_appln_title_it union all 
+      select appln_id, appln_title from tls202_appln_title_ja union all 
+      select appln_id, appln_title from tls202_appln_title_ko union all 
+      select appln_id, appln_title from tls202_appln_title_lt union all 
+      select appln_id, appln_title from tls202_appln_title_lv union all 
+      select appln_id, appln_title from tls202_appln_title_nl union all 
+      select appln_id, appln_title from tls202_appln_title_no union all 
+      select appln_id, appln_title from tls202_appln_title_pl union all 
+      select appln_id, appln_title from tls202_appln_title_pt union all 
+      select appln_id, appln_title from tls202_appln_title_ro union all 
+      select appln_id, appln_title from tls202_appln_title_ru union all 
+      select appln_id, appln_title from tls202_appln_title_sh union all 
+      select appln_id, appln_title from tls202_appln_title_sk union all 
+      select appln_id, appln_title from tls202_appln_title_sl union all 
+      select appln_id, appln_title from tls202_appln_title_sr union all 
+      select appln_id, appln_title from tls202_appln_title_sv union all 
+      select appln_id, appln_title from tls202_appln_title_tr union all 
+      select appln_id, appln_title from tls202_appln_title_uk union all 
+      select appln_id, appln_title from tls202_appln_title_zh
+      ) t202 where t202.appln_id = tls208_appln_lists.appln_id)
+  ;
+go
