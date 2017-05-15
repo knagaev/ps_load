@@ -169,7 +169,8 @@ add
   ON t208.appln_id = t201.appln_id
   ;
 
-  UPDATE t208
+/*
+UPDATE t208
   SET 
   t208.appln_title = t202.appln_title,
   t208.appln_title_lg = t202.lng
@@ -209,6 +210,70 @@ select appln_id, 'zh' lng, cast(appln_title as nvarchar(max)) collate database_d
  ) t202 
 ON t208.appln_id = t202.appln_id
 ;
+*/
+
+/*
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'ar' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_ar t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'bg' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_bg t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'cs' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_cs t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'da' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_da t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'de' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_de t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'el' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_el t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'en' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_en t202 ON t208.appln_id = t202.appln_id where t202.appln_id not in (select appln_id from tls202_appln_title_ru) ;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'es' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_es t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'et' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_et t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'fr' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_fr t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'hr' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_hr t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'it' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_it t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'ja' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_ja t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'ko' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_ko t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'lt' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_lt t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'lv' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_lv t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'nl' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_nl t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'no' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_no t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'pl' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_pl t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'pt' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_pt t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'ro' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_ro t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'ru' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_ru t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'sh' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_sh t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'sk' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_sk t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'sl' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_sl t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'sr' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_sr t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'sv' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_sv t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'tr' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_tr t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'uk' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_uk t202 ON t208.appln_id = t202.appln_id;
+go
+UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'zh' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_zh t202 ON t208.appln_id = t202.appln_id;
+go
+*/
 
 UPDATE t208
   SET 
