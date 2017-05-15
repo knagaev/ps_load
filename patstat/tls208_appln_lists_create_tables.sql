@@ -89,3 +89,17 @@ go
 
 create index ndx_tmp_base_pat_publn_ids on tmp_base_pat_publn_ids(appln_id, base_pat_publn_id);
 go
+
+
+select t.appln_id, IPC, CPC, applicants, inventors, base_publn_date, YEAR(base_publn_date) base_publn_year, base_pat_publn_id--, appln_title
+into tls208_appln_lists
+from tls201_appln t
+inner join tmp_ipcs i on t.appln_id = i.appln_id
+inner join tmp_cpcs ñ on t.appln_id = ñ.appln_id
+inner join tmp_applicants apl on t.appln_id = apl.appln_id
+inner join tmp_inventors inv on t.appln_id = inv.appln_id
+inner join tmp_base_publn_dates d on t.appln_id = d.appln_id
+inner join tmp_base_pat_publn_ids p on t.appln_id = p.appln_id
+--inner join tls202_appln_title at on t.appln_id = at.appln_id
+;
+go
