@@ -134,51 +134,19 @@ inner join tmp_base_pat_publn_ids p on t.appln_id = p.appln_id
 go
 
 
-update tls208_appln_lists
-  set appln_title = (select apt from 
-      (
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_ar union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_bg union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_cs union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_da union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_de union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_el union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_en union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_es union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_et union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_fr union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_hr union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_it union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_ja union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_ko union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_lt union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_lv union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_nl union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_no union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_pl union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_pt union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_ro union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_ru union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_sh union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_sk union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_sl union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_sr union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_sv union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_tr union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_uk union  
-      select appln_id, appln_title collate DATABASE_DEFAULT apt from tls202_appln_title_zh
-      ) t202 where t202.appln_id = tls208_appln_lists.appln_id)
-  ;
-
   alter table tls208_appln_lists
 add
+  [appln_title] nvarchar(max),
+  [appln_title_lg] varchar(2),
+  [appln_title_en] nvarchar(max),
   [base_publn_auth] [char](2) NULL,
   [base_publn_nr] [varchar](20) NULL,
   [base_publn_kind] [char](2) NULL,
   [appln_auth] [char](2) NULL,
   [appln_nr] [varchar](20) NULL,
   [appln_kind] [char](2) NULL,
-  [appln_date] [date] NULL;
+  [appln_date] [date] NULL
+  ;
 
   UPDATE t208
   SET 
