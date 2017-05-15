@@ -170,3 +170,82 @@ update tls208_appln_lists
       ) t202 where t202.appln_id = tls208_appln_lists.appln_id)
   ;
 
+  alter table tls208_appln_lists
+add
+  [base_publn_auth] [char](2) NULL,
+  [base_publn_nr] [varchar](20) NULL,
+  [base_publn_kind] [char](2) NULL,
+  [appln_auth] [char](2) NULL,
+  [appln_nr] [varchar](20) NULL,
+  [appln_kind] [char](2) NULL,
+  [appln_date] [date] NULL;
+
+  UPDATE t208
+  SET 
+  t208.base_publn_auth = pba.base_publn_auth,
+  t208.base_publn_nr = pba.base_publn_nr,
+  t208.base_publn_kind = pba.base_publn_kind
+  FROM tls208_appln_lists AS t208
+  INNER JOIN tmp_base_publn_auths AS pba
+  ON t208.appln_id = pba.appln_id
+  ;
+
+  UPDATE t208
+  SET 
+  t208.appln_auth = t201.appln_auth,
+  t208.appln_nr = t201.appln_nr,
+  t208.appln_kind = t201.appln_kind,
+  t208.appln_date = t201.appln_filing_date
+  FROM tls208_appln_lists AS t208
+  INNER JOIN tls201_appln AS t201
+  ON t208.appln_id = t201.appln_id
+  ;
+
+  UPDATE t208
+  SET 
+  t208.appln_title = t202.appln_title,
+  t208.appln_title_lg = t202.lng
+FROM tls208_appln_lists AS t208
+INNER JOIN
+(
+select appln_id, 'ar' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_ar union all  
+select appln_id, 'bg' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_bg union all  
+select appln_id, 'cs' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_cs union all  
+select appln_id, 'da' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_da union all  
+select appln_id, 'de' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_de union all  
+select appln_id, 'el' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_el union all  
+select appln_id, 'en' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_en where appln_id not in (select appln_id from tls202_appln_title_ru) union all  
+select appln_id, 'es' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_es union all  
+select appln_id, 'et' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_et union all  
+select appln_id, 'fr' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_fr union all  
+select appln_id, 'hr' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_hr union all  
+select appln_id, 'it' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_it union all  
+select appln_id, 'ja' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_ja union all  
+select appln_id, 'ko' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_ko union all  
+select appln_id, 'lt' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_lt union all  
+select appln_id, 'lv' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_lv union all  
+select appln_id, 'nl' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_nl union all  
+select appln_id, 'no' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_no union all  
+select appln_id, 'pl' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_pl union all  
+select appln_id, 'pt' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_pt union all  
+select appln_id, 'ro' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_ro union all  
+select appln_id, 'ru' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_ru union all  
+select appln_id, 'sh' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_sh union all  
+select appln_id, 'sk' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_sk union all  
+select appln_id, 'sl' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_sl union all  
+select appln_id, 'sr' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_sr union all  
+select appln_id, 'sv' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_sv union all  
+select appln_id, 'tr' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_tr union all  
+select appln_id, 'uk' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_uk union all  
+select appln_id, 'zh' lng, cast(appln_title as nvarchar(max)) collate database_default appln_title from tls202_appln_title_zh
+ ) t202 
+ON t208.appln_id = t202.appln_id
+;
+
+UPDATE t208
+  SET 
+  t208.appln_title_en = cast(t202.appln_title as nvarchar(max)) collate database_default
+FROM tls208_appln_lists AS t208
+INNER JOIN tls202_appln_title_en t202
+ON t208.appln_id = t202.appln_id
+;
