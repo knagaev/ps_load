@@ -282,3 +282,7 @@ FROM tls208_appln_lists AS t208
 INNER JOIN tls202_appln_title_en t202
 ON t208.appln_id = t202.appln_id
 ;
+
+ALTER TABLE tls208_appln_lists    
+ADD CONSTRAINT PK_tls208_appln_lists PRIMARY KEY CLUSTERED (appln_id); 
+GO  
