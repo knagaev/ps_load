@@ -178,8 +178,8 @@ select appln_year, count(*)
 from 
 appln_search ayc
 where 
-ayc.appln_id in (select KEY from FN_SEARCH_FORMSOF_FT_TLS_203 (N'красный, лазер') 
-or ayc.appln_id in (select KEY from FN_SEARCH_FORMSOF_FT_TLS_203 (N'синий, кубик')
-or ayc.appln_id in (select KEY from FN_SEARCH_FORMSOF_FT_TLS_203 (N'белый, слон')
+ayc.appln_id in (select appln_id from FN_SEARCH_FORMSOF_FT_TLS_203 (N'красный, лазер', N'and')) 
+or ayc.appln_id in (select appln_id from FN_SEARCH_FORMSOF_FT_TLS_203 (N'синий, кубик', N'and'))
+or ayc.appln_id in (select appln_id from FN_SEARCH_FORMSOF_FT_TLS_203 (N'белый, слон', N'and'))
 group by appln_year
 order by appln_year;
