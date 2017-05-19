@@ -48,7 +48,8 @@ GO
 -- Description:	Загрузка tls_203 Patstat
 -- =============================================
 CREATE FUNCTION [dbo].[FN_SEARCH_FORMSOF_FT_TLS_203] (
-	@cond nvarchar(max)
+	@cond nvarchar(max),
+	@operator nvarchar(6) = 'AND'
 	)
 RETURNS  @rtnTable TABLE 
 (
@@ -63,10 +64,10 @@ BEGIN
 	
 	select @formsof = SUBSTRING(
 								(
-								select N' AND FORMSOF(INFLECTIONAL,"' + t1.Item + N'")' AS [text()]
+								select N' ' + @operator + ' FORMSOF(INFLECTIONAL,"' + t1.Item + N'")' AS [text()]
 											From splitstring(@cond, DEFAULT) t1
 											For XML PATH ('')
-								), 6, 8000);
+								), LEN(@operator) + 2, 8000);
 
 	INSERT @rtnTable
 	SELECT [KEY]
