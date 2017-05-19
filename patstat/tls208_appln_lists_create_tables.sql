@@ -286,3 +286,16 @@ ON t208.appln_id = t202.appln_id
 ALTER TABLE tls208_appln_lists    
 ADD CONSTRAINT PK_tls208_appln_lists PRIMARY KEY CLUSTERED (appln_id); 
 GO  
+
+
+ALTER TABLE tls209_appln_ipc ADD ipc_brief AS left(ipc_class_symbol(4));
+CREATE INDEX ndx_ipc_brief ON tls209_appln_ipc(ipc_brief);
+go
+create view ipc_brief_search as select appln_id, ipc_brief from tls209_appln_ipc;
+go
+
+ALTER TABLE tls224_appln_cpc ADD cpc_brief AS left(cpc_class_symbol(4));
+CREATE INDEX ndx_cpc_brief ON tls224_appln_cpc(cpc_brief);
+go
+create view cpc_brief_search as select appln_id, cpc_brief from tls224_appln_cpc;
+go
