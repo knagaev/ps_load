@@ -1,6 +1,37 @@
 use patscape
 go
 
+--INSERT INTO patscape.[dbo].[tls209_appln_ipc]
+  SELECT *
+  FROM [patstat2016a].[dbo].[tls209_appln_ipc]
+  where appln_id not in (select appln_id from patscape.dbo.tls209_appln_ipc)
+  ;
+
+--INSERT INTO patscape.[dbo].[tls224_appln_cpc]
+  SELECT *
+  FROM [patstat2016a].[dbo].[tls224_appln_cpc]
+  where appln_id not in (select appln_id from patscape.dbo.tls224_appln_cpc)
+  ;
+
+--INSERT INTO patscape.[dbo].[tls207_pers_appln]
+  SELECT *
+  FROM [patstat2016a].[dbo].[tls207_pers_appln]
+  where appln_id not in (select appln_id from patscape.dbo.tls207_pers_appln)
+  ;
+
+--INSERT INTO patscape.[dbo].[tls206_person]
+  SELECT *
+  FROM [patstat2016a].[dbo].[tls206_person]
+  where appln_id not in (select appln_id from patscape.dbo.tls206_person)
+  ;
+
+--INSERT INTO patscape.[dbo].[tls211_pat_publn]
+  SELECT *
+  FROM [patstat2016a].[dbo].[tls211_pat_publn]
+  where appln_id not in (select appln_id from patscape.dbo.tls211_pat_publn)
+  ;
+
+
 select appln_id, IPC = stuff((select '; ' + replace(ipc_class_symbol, ' ', '') as [text()]
 							from tls209_appln_ipc xt
 							where xt.appln_id = t.appln_id order by ipc_position asc
@@ -53,6 +84,7 @@ go
 create unique index ndx_tmp_inventors on tmp_inventors(appln_id);
 go
 
+/*
 SELECT t201.appln_id,
   CASE 
     WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.publn_date
@@ -67,11 +99,16 @@ FROM tls201_appln t201
               WHERE t211.rn = 1) t211rusu ON t211rusu.appln_id = t201.appln_id AND t201.appln_auth in ('RU','SU')
 ;
 go
+*/
 
 create index ndx_tmp_base_publn_dates on tmp_base_publn_dates(appln_id, base_publn_date);
 go
 --drop table tmp_base_publn_auths
 SELECT t201.appln_id,
+  CASE 
+    WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.publn_date
+    ELSE t201.earliest_publn_date
+  end AS base_publn_date,
   CASE 
     WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.publn_auth
     ELSE (select publn_auth from tls211_pat_publn t211 where t211.pat_publn_id = t201.earliest_pat_publn_id)
@@ -83,22 +120,26 @@ SELECT t201.appln_id,
   CASE 
     WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.publn_kind
     ELSE (select publn_kind from tls211_pat_publn t211 where t211.pat_publn_id = t201.earliest_pat_publn_id)
-  end AS base_publn_kind
-
+  end AS base_publn_kind,
+  CASE 
+    WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.pat_publn_id
+    ELSE t201.earliest_pat_publn_id
+  end AS base_pat_publn_id
 into tmp_base_publn_auths
 FROM tls201_appln t201 
-  LEFT JOIN (SELECT t211.appln_id, t211.publn_auth, t211.publn_nr, t211.publn_kind
+  LEFT JOIN (SELECT t211.appln_id, t211.publn_date, t211.publn_auth, t211.publn_nr, t211.publn_kind, t211.pat_publn_id
               FROM 
-              (SELECT appln_id, publn_auth, publn_nr, publn_kind, ROW_NUMBER() OVER (PARTITION BY appln_id ORDER BY publn_date DESC) rn 
+              (SELECT appln_id, publn_date, publn_auth, publn_nr, publn_kind, pat_publn_id, 
+                  ROW_NUMBER() OVER (PARTITION BY appln_id ORDER BY publn_date DESC) rn 
                 FROM tls211_pat_publn WHERE publn_date <> '9999-12-31') t211
               WHERE t211.rn = 1) t211rusu ON t211rusu.appln_id = t201.appln_id AND t201.appln_auth in ('RU','SU')
 ;
 go
 
-create index ndx_tmp_base_publn_auths on tmp_base_publn_auths(appln_id, base_publn_auth);
+create index ndx_tmp_base_publn_auths on tmp_base_publn_auths(appln_id);
 go
 
-
+/*
 SELECT t201.appln_id,
   CASE 
     WHEN t201.appln_auth in ('RU','SU') THEN t211rusu.pat_publn_id
@@ -116,24 +157,29 @@ go
 
 create index ndx_tmp_base_pat_publn_ids on tmp_base_pat_publn_ids(appln_id, base_pat_publn_id);
 go
+*/
 
 
-select t.appln_id, IPC, CPC, applicants, inventors, base_publn_date, YEAR(base_publn_date) base_publn_year, base_pat_publn_id, '' appln_title
+select t.appln_id, IPC, CPC, applicants, inventors, base_publn_date, YEAR(base_publn_date) base_publn_year, 
+  base_pat_publn_id, N'' appln_title, '  ' appln_title_lg, N'' appln_title_en, 
+  base_publn_auth, base_publn_nr, base_publn_kind,
+  appln_auth, appln_nr, appln_kind, appln_filing_date
 into tls208_appln_lists
 from tls201_appln t
 inner join tmp_ipcs i on t.appln_id = i.appln_id
 inner join tmp_cpcs с on t.appln_id = с.appln_id
 inner join tmp_applicants apl on t.appln_id = apl.appln_id
 inner join tmp_inventors inv on t.appln_id = inv.appln_id
-inner join tmp_base_publn_dates d on t.appln_id = d.appln_id
-inner join tmp_base_pat_publn_ids p on t.appln_id = p.appln_id
+left join tmp_base_publn_auths b on t.appln_id = b.appln_id
+--inner join tmp_base_publn_dates d on t.appln_id = d.appln_id
+--inner join tmp_base_pat_publn_ids p on t.appln_id = p.appln_id
 --inner join tls202_appln_title at on t.appln_id = at.appln_id
 
 
 
 go
 
-
+/*
   alter table tls208_appln_lists
 add
   [appln_title] nvarchar(max),
@@ -168,8 +214,8 @@ add
   INNER JOIN tls201_appln AS t201
   ON t208.appln_id = t201.appln_id
   ;
-
-/*
+*/
+/* медленная версия
 UPDATE t208
   SET 
   t208.appln_title = t202.appln_title,
@@ -212,7 +258,7 @@ ON t208.appln_id = t202.appln_id
 ;
 */
 
-/*
+/* более быстрая версия
 UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'ar' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_ar t202 ON t208.appln_id = t202.appln_id;
 go
 UPDATE t208 SET t208.appln_title = cast(t202.appln_title as nvarchar(max)) collate database_default, t208.appln_title_lg = 'bg' FROM tls208_appln_lists AS t208 INNER JOIN tls202_appln_title_bg t202 ON t208.appln_id = t202.appln_id;
