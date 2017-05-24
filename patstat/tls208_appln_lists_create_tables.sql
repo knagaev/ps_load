@@ -1,37 +1,72 @@
 use patscape
 go
-
---INSERT INTO patscape.[dbo].[tls209_appln_ipc]
+SELECT count(*)
+  FROM patscape.[dbo].tls201_appln
+  where appln_id not in (select appln_id from patstat2016a.dbo.tls201_appln)
+  ;
+INSERT INTO patscape.[dbo].[tls209_appln_ipc]
   SELECT *
   FROM [patstat2016a].[dbo].[tls209_appln_ipc]
   where appln_id not in (select appln_id from patscape.dbo.tls209_appln_ipc)
+  and appln_id in (select appln_id from patscape.dbo.tls201_appln)
+  
   ;
+  select count(*) from patscape.dbo.tls201_appln where appln_id = 1428572;
+  
+  select * from patscape.dbo.tls201_appln where appln_id = 1428572;
 
---INSERT INTO patscape.[dbo].[tls224_appln_cpc]
+INSERT INTO patscape.[dbo].[tls224_appln_cpc]
   SELECT *
   FROM [patstat2016a].[dbo].[tls224_appln_cpc]
   where appln_id not in (select appln_id from patscape.dbo.tls224_appln_cpc)
+    and appln_id in (select appln_id from patscape.dbo.tls201_appln)
   ;
 
---INSERT INTO patscape.[dbo].[tls207_pers_appln]
+INSERT INTO patscape.[dbo].[tls207_pers_appln]
   SELECT *
   FROM [patstat2016a].[dbo].[tls207_pers_appln]
-  where appln_id not in (select appln_id from patscape.dbo.tls207_pers_appln)
-  ;
+  where person_id not in (select person_id from patscape.dbo.tls207_pers_appln)
+  and appln_id in (select appln_id from patscape.dbo.tls201_appln)
 
---INSERT INTO patscape.[dbo].[tls206_person]
+  ;
+   
+INSERT INTO patscape.[dbo].[tls206_person]
   SELECT *
   FROM [patstat2016a].[dbo].[tls206_person]
-  where appln_id not in (select appln_id from patscape.dbo.tls206_person)
+  where person_id not in (select person_id from patscape.dbo.tls206_person)
   ;
 
---INSERT INTO patscape.[dbo].[tls211_pat_publn]
-  SELECT *
+
+
+USE [patscape]
+GO
+
+INSERT INTO [patscape].dbo.[tls211_pat_publn]
+           ([pat_publn_id]
+           ,[publn_auth]
+           ,[publn_nr]
+           ,[publn_nr_original]
+           ,[publn_kind]
+           ,[appln_id]
+           ,[publn_date]
+           ,[publn_lg]
+           ,[publn_first_grant]
+           ,[publn_claims])
+  SELECT [pat_publn_id]
+           ,[publn_auth]
+           ,[publn_nr]
+           ,[publn_nr_original]
+           ,[publn_kind]
+           ,[appln_id]
+           ,[publn_date]
+           ,[publn_lg]
+           ,[publn_first_grant]
+           ,[publn_claims]
   FROM [patstat2016a].[dbo].[tls211_pat_publn]
-  where appln_id not in (select appln_id from patscape.dbo.tls211_pat_publn)
+  where pat_publn_id not in (select pat_publn_id from patscape.dbo.tls211_pat_publn)
   ;
 
-
+--drop table tmp_ipcs
 select appln_id, IPC = stuff((select '; ' + replace(ipc_class_symbol, ' ', '') as [text()]
 							from tls209_appln_ipc xt
 							where xt.appln_id = t.appln_id order by ipc_position asc
@@ -44,6 +79,7 @@ go
 create unique index ndx_tmp_ipcs on tmp_ipcs(appln_id);
 go
 
+--drop table tmp_cpcs
 select appln_id, CPC = stuff((select '; ' + replace(cpc_class_symbol, ' ', '') as [text()]
 						from tls224_appln_cpc xt
 						where xt.appln_id = t.appln_id order by cpc_position asc
