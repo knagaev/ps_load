@@ -4,7 +4,7 @@ CREATE FULLTEXT INDEX ON tls206_person
   doc_std_name,
   psn_name
  ) 
-  KEY INDEX PK
+  KEY INDEX PK_tls206_person
   ON tls_ft
   WITH STOPLIST = SYSTEM, CHANGE_TRACKING OFF, NO POPULATION;
 GO                
