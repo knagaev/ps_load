@@ -26,7 +26,7 @@ group by appln_auth
 order by appln_auth;
 
 -- 3
-select IPC_brief, count(*)
+select aps.appln_id, IPC_brief--, count(*)
 from 
 appln_search aps inner join ipc_brief_search ibs ON ibs.appln_id=aps.appln_id
 where
@@ -52,6 +52,7 @@ and appln_year in ('2011') AND appln_auth in ('RU')
 group by CPC_brief
 order by count(*) desc;
 
+select * from tls207_pers_appln where appln_id = 375902491;
 --4
 select DISTINCT
       totalResults=COUNT(t208.appln_id) OVER()

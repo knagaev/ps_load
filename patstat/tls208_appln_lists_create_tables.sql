@@ -92,6 +92,7 @@ go
 create unique index ndx_tmp_cpcs on tmp_cpcs(appln_id);
 go
 
+--drop table tmp_applicants
 select appln_id, 
         applicants = stuff((select '; ' + person_name as [text()]
           from tls206_person p inner join tls207_pers_appln xt on xt.person_id = p.person_id
@@ -106,6 +107,7 @@ go
 create unique index ndx_tmp_applicants on tmp_applicants(appln_id);
 go
 
+--drop table tmp_inventors
 select appln_id, 
         inventors = stuff((select '; ' + person_name as [text()]
           from tls206_person p inner join tls207_pers_appln xt on xt.person_id = p.person_id
@@ -202,10 +204,10 @@ select t.appln_id, IPC, CPC, applicants, inventors, base_publn_date, YEAR(base_p
   appln_auth, appln_nr, appln_kind, appln_filing_date
 into tls208_appln_lists
 from tls201_appln t
-inner join tmp_ipcs i on t.appln_id = i.appln_id
-inner join tmp_cpcs ñ on t.appln_id = ñ.appln_id
-inner join tmp_applicants apl on t.appln_id = apl.appln_id
-inner join tmp_inventors inv on t.appln_id = inv.appln_id
+left join tmp_ipcs i on t.appln_id = i.appln_id
+left join tmp_cpcs ñ on t.appln_id = ñ.appln_id
+left join tmp_applicants apl on t.appln_id = apl.appln_id
+left join tmp_inventors inv on t.appln_id = inv.appln_id
 left join tmp_base_publn_auths b on t.appln_id = b.appln_id
 --inner join tmp_base_publn_dates d on t.appln_id = d.appln_id
 --inner join tmp_base_pat_publn_ids p on t.appln_id = p.appln_id
@@ -366,7 +368,7 @@ ON t208.appln_id = t202.appln_id
 ;
 
 ALTER TABLE tls208_appln_lists    
-ADD CONSTRAINT PK_tls208_appln_lists PRIMARY KEY CLUSTERED (appln_id); 
+ADD CONSTRAINT PK_tls208_appln_lists_new PRIMARY KEY CLUSTERED (appln_id); 
 GO  
 
 
